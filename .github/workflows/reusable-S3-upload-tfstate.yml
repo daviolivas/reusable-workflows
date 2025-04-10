@@ -1,7 +1,9 @@
 name: Upload .tfstate to AWS S3
 
-on: []
-  #workflow_call:
+on: 
+  workflow_call:
+  
+  workflow_dispatch:
 
 jobs:
   uploadS3:
