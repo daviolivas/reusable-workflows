@@ -4,6 +4,15 @@ on:
   workflow_call:
   
   workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Tipo de ação'
+        required: true
+        default: 'apply'
+        type: choice
+        options:
+        - apply
+        - destroy
 
 jobs:
   uploadS3:
