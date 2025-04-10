@@ -1,0 +1,13 @@
+name: Upload .tfstate to AWS S3
+
+on: []
+
+jobs:
+  uploadS3:
+    runs-on: ubuntu-latest
+    steps:
+
+    - name: Check Out
+      uses: actions/checkout@v4
+
+      
