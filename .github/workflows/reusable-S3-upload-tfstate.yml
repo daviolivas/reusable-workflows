@@ -22,4 +22,7 @@ jobs:
     - name: Check Out
       uses: actions/checkout@v4
 
+    - name: teste
+      run: | 
+        echo 'oi, vim do repo do upload para o s3'
       
