@@ -19,10 +19,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
-    - name: Download Terraform State Artifact
-      uses: actions/download-artifact@v4
-      with:
-        name: terraform-state
+#    - name: Download Terraform State Artifact
+#      uses: actions/download-artifact@v4
+#      with:
+#        name: terraform-state
 
     - name: Check Out
       uses: actions/checkout@v4
