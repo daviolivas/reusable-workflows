@@ -22,7 +22,7 @@ jobs:
     - name: Download Terraform State Artifact
       uses: actions/download-artifact@v4
       with:
-        name: hello-txt
+        name: terraform-state
 
     - name: Check Out
       uses: actions/checkout@v4
@@ -38,4 +38,3 @@ jobs:
       run: |
         aws s3 ls
         aws s3 cp hello.txt s3://terraform-tfstate-bucket-davi
-      
