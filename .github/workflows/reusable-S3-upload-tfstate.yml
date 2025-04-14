@@ -37,4 +37,4 @@ jobs:
     - name: listando buckets e upload do .tfstate
       run: |
         aws s3 ls
-        aws s3 cp hello.txt s3://terraform-tfstate-bucket-davi
+        aws s3 cp terraform.tfstate s3://terraform-tfstate-bucket-davi
