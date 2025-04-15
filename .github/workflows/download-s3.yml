@@ -46,11 +46,11 @@ jobs:
     - name: Gerar Arquivo
       id: gerar
       run: |
-        echo "puta que pariu eu " > output.txt
-        echo "::set-output name=nome_arquivo::output.txt"
+        echo "::set-output name=nome_arquivo::terraform.tfstate"
+#        echo terraform.tfstate > output.txt
 
     - name: Upload Artefato
       uses: actions/upload-artifact@v4
       with:
         name: arquivo-gerado-reutilizavel
-        path: output.txt
+        path: terraform.tfstate
