@@ -17,6 +17,7 @@ on:
 jobs:
   download-S3:
     runs-on: ubuntu-latest
+    outputs: ${{ steps.gerar.outputs.terraform.tfstate }}
     steps:
 
 #    - name: Download Terraform State Artifact
@@ -32,10 +33,23 @@ jobs:
       with:
         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        aws-region: us-east-2
+        aws-region: us-east-2          
       
     - name: listando buckets e download do .tfstate
       run: |
         aws s3 ls
         aws s3 cp s3://terraform-tfstate-bucket-davi/terraform.tfstate ./
         cat terraform.tfstate
+
+
+    - name: Gerar Arquivo
+      id: gerar
+      run: |
+        echo "Conteúdo do arquivo gerado na pipeline reutilizável" > output.txt
+        echo "::set-output name=terraform.tfstate::terraform.tfstate"
+
+    - name: Upload Artefato
+      uses: actions/upload-artifact@v4
+      with:
+        name: arquivo-gerado-reutilizavel
+        path: output.txt
