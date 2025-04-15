@@ -47,10 +47,10 @@ jobs:
       id: gerar
       run: |
         echo "Conteúdo do arquivo gerado na pipeline reutilizável" > output.txt
-        echo "::set-output name=terraform.tfstate::terraform.tfstate"
+        echo "::set-output name=nome_arquivo::output.txt"
 
     - name: Upload Artefato
       uses: actions/upload-artifact@v4
       with:
         name: arquivo-gerado-reutilizavel
-        path: terraform.state
+        path: arquivos-da-reutilizavel
