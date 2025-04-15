@@ -17,7 +17,8 @@ on:
 jobs:
   download-S3:
     runs-on: ubuntu-latest
-    outputs: ${{ steps.gerar.outputs.terraform.tfstate }}
+    outputs:
+      arquivo-gerado: ${{ steps.gerar.outputs.terraform.tfstate }}
     steps:
 
 #    - name: Download Terraform State Artifact
@@ -52,4 +53,4 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: arquivo-gerado-reutilizavel
-        path: output.txt
+        path: terraform.state
