@@ -38,3 +38,4 @@ jobs:
       run: |
         aws s3 ls
         aws s3 cp s3://terraform-tfstate-bucket-davi/terraform.tfstate ./
+        cat terraform.tfstate
