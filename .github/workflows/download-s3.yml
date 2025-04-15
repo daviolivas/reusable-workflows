@@ -18,7 +18,7 @@ jobs:
   download-S3:
     runs-on: ubuntu-latest
     outputs:
-      arquivo-gerado: ${{ steps.gerar.outputs.terraform.tfstate }}
+      arquivo-gerado: ${{ steps.gerar.outputs.nome_arquivo }}
     steps:
 
 #    - name: Download Terraform State Artifact
