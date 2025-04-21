@@ -2,6 +2,10 @@ name: Upload .tfstate to AWS S3
 
 on: 
   workflow_call:
+    inputs:
+        nome_arquivo:
+          required: true
+          type: string
   
   workflow_dispatch:
     inputs:
@@ -39,5 +43,6 @@ jobs:
       run: |
         aws s3 ls
         ls
-        cat oi-porra.txt
+        echo "${{ inputs.nome_arquivo }}" > porra.txt
+        echo porra.txt
 #        aws s3 cp terraform.tfstate s3://terraform-tfstate-bucket-davi
