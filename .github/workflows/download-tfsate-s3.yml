@@ -25,7 +25,7 @@ jobs:
         aws-region: us-east-2          
       
     - name: .tfstate Download
-      run: aws s3 cp s3://terraform-tfstate-bucket-davi/${{ inputs.resource }}/terraform.tfstate ./
+      run: aws s3 cp s3://tfstate-actions-bucket/${{ inputs.resource }}/terraform.tfstate ./
 
 
     - name: Gerar Arquivo
