@@ -2,7 +2,10 @@ name: Upload .tfstate to AWS S3
 
 on: 
   workflow_call:
-  #passar input aqui para saber qual .tfstate baixar
+    inputs:
+      resource:
+        required: true
+        type: string
   
 jobs:
   download-S3:
@@ -21,8 +24,8 @@ jobs:
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: us-east-2          
       
-    - name: listando buckets e download do .tfstate
-      run: aws s3 cp s3://terraform-tfstate-bucket-davi/terraform.tfstate ./
+    - name: .tfstate Download
+      run: aws s3 cp s3://terraform-tfstate-bucket-davi/${{ inputs.resource }}/terraform.tfstate ./
 
 
     - name: Gerar Arquivo
