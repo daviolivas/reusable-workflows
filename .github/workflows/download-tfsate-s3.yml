@@ -2,18 +2,8 @@ name: Upload .tfstate to AWS S3
 
 on: 
   workflow_call:
+  #passar input aqui para saber qual .tfstate baixar
   
-  workflow_dispatch:
-    inputs:
-      environment:
-        description: 'Tipo de ação'
-        required: true
-        default: 'apply'
-        type: choice
-        options:
-        - apply
-        - destroy
-
 jobs:
   download-S3:
     runs-on: ubuntu-latest
@@ -21,15 +11,10 @@ jobs:
       arquivo-gerado: ${{ steps.gerar.outputs.nome_arquivo }}
     steps:
 
-#    - name: Download Terraform State Artifact
-#      uses: actions/download-artifact@v4
-#      with:
-#        name: terraform-state
-
     - name: Check Out
       uses: actions/checkout@v4
 
-    - name: teste
+    - name: AWS Login
       uses: aws-actions/configure-aws-credentials@v4.1.0
       with:
         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
@@ -37,17 +22,12 @@ jobs:
         aws-region: us-east-2          
       
     - name: listando buckets e download do .tfstate
-      run: |
-        aws s3 ls
-        aws s3 cp s3://terraform-tfstate-bucket-davi/terraform.tfstate ./
-        cat terraform.tfstate
+      run: aws s3 cp s3://terraform-tfstate-bucket-davi/terraform.tfstate ./
 
 
     - name: Gerar Arquivo
       id: gerar
-      run: |
-        echo "::set-output name=nome_arquivo::terraform.tfstate"
-#        echo terraform.tfstate > output.txt
+      run: echo "::set-output name=nome_arquivo::terraform.tfstate"
 
     - name: Upload Artefato
       uses: actions/upload-artifact@v4
