@@ -44,5 +44,5 @@ jobs:
         aws s3 ls
         ls
         echo "${{ inputs.nome_arquivo }}" > porra.txt
-        echo porra.txt
+        cat porra.txt
 #        aws s3 cp terraform.tfstate s3://terraform-tfstate-bucket-davi
