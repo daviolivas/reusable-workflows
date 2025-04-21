@@ -39,5 +39,5 @@ jobs:
       run: |
         aws s3 ls
         ls
-        cat terraform.tfstate
-        aws s3 cp terraform.tfstate s3://terraform-tfstate-bucket-davi
+        cat oi-porra.txt
+#        aws s3 cp terraform.tfstate s3://terraform-tfstate-bucket-davi
