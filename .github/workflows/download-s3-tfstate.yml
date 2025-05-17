@@ -1,0 +1,39 @@
+name: Download .tfstate from AWS S3
+run-name: Download .tfstate
+
+on: 
+  workflow_call:
+    inputs:
+      resource:
+        required: true
+        type: string
+  
+jobs:
+  download-tfsate:
+    runs-on: ubuntu-latest
+    outputs:
+      tfsate-baixado: ${{ steps.gerar.outputs.tfstate }}
+    steps:
+
+    - name: ⬇️ Checkout
+      uses: actions/checkout@v4
+
+    - name: 🔓 AWS Login
+      uses: aws-actions/configure-aws-credentials@v4.1.0
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: us-east-2          
+      
+    - name: ⬇️ Download .tfstate
+      run: aws s3 cp s3://tfstate-actions-bucket/${{ inputs.resource }}/terraform.tfstate ./
+
+    - name: 📄 Gerar .tfsate
+      id: gerar
+      run: echo "::set-output name=tfstate::terraform.tfstate"
+
+    - name: ⬆️ Upload do .tfsate para o outro repositório
+      uses: actions/upload-artifact@v4
+      with:
+        name: tfsate-from-reusable-workflow
+        path: terraform.tfstate
